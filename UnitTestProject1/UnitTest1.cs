@@ -18,7 +18,20 @@ namespace UnitTestProject1
 
 
         }
+        [TestMethod]
+        public void Given_Null_Returned_Happy()
+        {
+            string message = null;
+            string expected = "happy";
 
-      
+            MoodAnalyser obj = new MoodAnalyser(message);
+            string actual = obj.AnalyseMood();
+
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
+
     }
 }
