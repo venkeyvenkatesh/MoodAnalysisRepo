@@ -29,13 +29,21 @@ namespace MoodAnalyserApplication
         public string AnalyseMood()
 
         {
-            if (this.message.Contains("happy"))
+            try
+            {
+
+                if (this.message.Contains("happy"))
+                {
+                    return "happy";
+                }
+                else
+                {
+                    return "sad";
+                }
+            }
+            catch
             {
                 return "happy";
-            }
-            else
-            {
-                return "sad";
             }
 
         }
