@@ -12,7 +12,7 @@ namespace MoodAnalyserApplication
         {
             Console.WriteLine("Hello World!");
 
-            MoodAnalyser obj = new MoodAnalyser("iam so happy today");
+            MoodAnalyser obj = new MoodAnalyser("");
             string message = obj.AnalyseMood();
             Console.WriteLine(message);
         }
