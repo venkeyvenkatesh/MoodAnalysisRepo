@@ -9,31 +9,37 @@ namespace MoodAnalyserApplication
     public class MoodAnalyserFactory
     {
 
-        public static object CreateMoodAnalysis(string className,string constructorName)
+        public static object CreateMoodAnalysisUsingParamsCtor(string className,string constructorName,string message)
         {
-            string pattern=@"."+constructorName+"$";
-            Match result = Regex.Match(className, pattern);
 
-            if(result.Success)
+            Type type = typeof(MoodAnalyser);
+
+
+            if(type.Name.Equals(className)|| type.FullName.Equals(className))
             {
-                try
+                if(type.Name.Equals(constructorName))
                 {
-                    //  Type type = Type.GetType(className);
-                    //  return type;
 
-                    Assembly executing =Assembly.GetExecutingAssembly();
-                    Type moodAnalysisType = executing.GetType(className);
-                    return Activator.CreateInstance(moodAnalysisType);
+
+                    ConstructorInfo ctor = type.GetConstructor(new[] { typeof(string) });
+                    object instance = ctor.Invoke(new object[] { message });
+                    return instance;
+                    //Type type = Type.GetType(className);
+                    //return type;
+
+                  //Assembly executing =Assembly.GetExecutingAssembly();
+                  //Type moodAnalysisType = executing.GetType(className);
+                 //return Activator.CreateInstance(moodAnalysisType);
 
                 }
-                catch(ArgumentNullException)
+            else
                 {
-                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "Class not found");
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Constructor not found");
                 }
             }
             else
             {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "constructor is not found");
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "class is not found");
             }
         }
 

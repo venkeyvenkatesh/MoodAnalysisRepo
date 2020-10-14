@@ -64,8 +64,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void GivenMoodAnalyseClassName_ReturnMoodAnalyseObject()
         {
-            object expected = new MoodAnalyser();
-            object actual = MoodAnalyserFactory.CreateMoodAnalysis("MoodAnalyserApplication.MoodAnalyser", "MoodAnalyser");
+            object expected = new MoodAnalyser("happy");
+            object actual = MoodAnalyserFactory.CreateMoodAnalysisUsingParamsCtor("MoodAnalyserApplication.MoodAnalyser", "MoodAnalyser","happy");
 
             expected.Equals(actual);
         }
