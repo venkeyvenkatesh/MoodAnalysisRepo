@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoodAnalyserApplication;
+using System.Security.Cryptography.X509Certificates;
+
 namespace UnitTestProject1
 {
     [TestClass]
@@ -56,8 +58,16 @@ namespace UnitTestProject1
                 Assert.AreEqual(expected, mae.type);
 
             }
+        }
 
 
+        [TestMethod]
+        public void GivenMoodAnalyseClassName_ReturnMoodAnalyseObject()
+        {
+            object expected = new MoodAnalyser();
+            object actual = MoodAnalyserFactory.CreateMoodAnalysis("MoodAnalyserApplication.MoodAnalyser", "MoodAnalyser");
+
+            expected.Equals(actual);
         }
     }
 }

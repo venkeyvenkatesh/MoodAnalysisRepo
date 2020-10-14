@@ -6,8 +6,8 @@ namespace MoodAnalyserApplication
 {
     public class MoodAnalyser
     {
-        //
-        private string message;
+        
+        public string message;
         /// <summary>
         /// Initializes a new instance of the <see cref="MoodAnalyser"/> class.
         /// </summary>
@@ -16,7 +16,10 @@ namespace MoodAnalyserApplication
         {
             this.message = message;
         }
+        public MoodAnalyser()
+        {
 
+        }
         /// <summary>
         /// Analyses the mood.
         /// </summary>
