@@ -46,7 +46,7 @@ namespace MoodAnalyserApplication
             try
             {
 
-                Type type = Type.GetType("MoodAnalyserApplication.MoodAnalyser");
+                Type type = Type.GetType("MethodAnalserApplication.MoodAnalyser");
 
                 object MoodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalysisUsingParamsCtor(type.FullName, type.Name, message);
 

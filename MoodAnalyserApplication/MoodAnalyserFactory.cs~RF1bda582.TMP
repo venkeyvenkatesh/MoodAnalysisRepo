@@ -4,8 +4,6 @@ using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-
 namespace MoodAnalyserApplication
 {
     public class MoodAnalyserFactory
@@ -16,15 +14,23 @@ namespace MoodAnalyserApplication
 
             Type type = typeof(MoodAnalyser);
 
+
             if(type.Name.Equals(className)|| type.FullName.Equals(className))
             {
                 if(type.Name.Equals(constructorName))
                 {
 
+
                     ConstructorInfo ctor = type.GetConstructor(new[] { typeof(string) });
                     object instance = ctor.Invoke(new object[] { message });
                     return instance;
-                    
+                    //Type type = Type.GetType(className);
+                    //return type;
+
+                  //Assembly executing =Assembly.GetExecutingAssembly();
+                  //Type moodAnalysisType = executing.GetType(className);
+                 //return Activator.CreateInstance(moodAnalysisType);
+
                 }
             else
                 {
@@ -34,29 +40,6 @@ namespace MoodAnalyserApplication
             else
             {
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "class is not found");
-            }
-
-
-           
-
-        }
-
-        public static string InvokeAnalyseMoodMethod(string message,string methodName)
-        {
-            try
-            {
-
-                Type type = Type.GetType("MoodAnalyserApplication.MoodAnalyser");
-
-                object MoodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalysisUsingParamsCtor(type.FullName, type.Name, message);
-
-                MethodInfo method = type.GetMethod(methodName);
-                object instance = method.Invoke(MoodAnalyserObject, null);
-                return instance.ToString();
-            }
-            catch(NullReferenceException)
-            {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Method not found");
             }
         }
 

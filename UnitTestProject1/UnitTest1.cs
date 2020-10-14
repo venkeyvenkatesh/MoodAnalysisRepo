@@ -69,5 +69,34 @@ namespace UnitTestProject1
 
             expected.Equals(actual);
         }
+
+
+        [TestMethod]
+        public void GivenImproperMoodAnalyseClassName_ThrowNoSuchClassException()
+        {
+            // object expected = new MoodAnalyser("happy");
+
+            MoodAnalysisException.ExceptionType expected = MoodAnalysisException.ExceptionType.NO_SUCH_CLASS;
+            try
+            {
+                MoodAnalyserFactory.CreateMoodAnalysisUsingParamsCtor("MoodAnalyserApplication.Mood", "MoodAnalyser", "happy");
+            }
+           catch(MoodAnalysisException mae)
+            {
+                Assert.AreEqual(expected, mae.type);
+            }
+           
+        }
+
+
+        [TestMethod]
+        public void GivenMoodAnalyseClassNameAndMethod_InvokeMethod()
+        {
+            string expected = "happy";
+            string actual = MoodAnalyserFactory.InvokeAnalyseMoodMethod("Iam so happy today", "AnalyseMood");
+            Assert.AreEqual(expected, actual);
+        }
+
+
     }
 }
