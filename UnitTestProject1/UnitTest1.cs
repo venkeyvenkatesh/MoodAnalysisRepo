@@ -7,6 +7,8 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest1
     {
+
+        //UC1
         [TestMethod]
         public void Given_Happy_Returned_Happy()
         {
@@ -21,6 +23,7 @@ namespace UnitTestProject1
 
         }
 
+        //UC2
         [TestMethod]
         public void Given_NULL_Throws_EXCEPTION()
         {
@@ -40,6 +43,7 @@ namespace UnitTestProject1
 
             }
         }
+        //UC3
         [TestMethod]
         public void Given_EmptyString_Throws_EXCEPTION()
         {
@@ -60,7 +64,8 @@ namespace UnitTestProject1
             }
         }
 
-
+        //UC5
+        
         [TestMethod]
         public void GivenMoodAnalyseClassName_ReturnMoodAnalyseObject()
         {
@@ -90,11 +95,78 @@ namespace UnitTestProject1
 
 
         [TestMethod]
+        public void GivenImproperMoodAnalyseCtorName_ThrowNoSuchMethodException()
+        {
+            
+
+            MoodAnalysisException.ExceptionType expected = MoodAnalysisException.ExceptionType.NO_SUCH_METHOD;
+            try
+            {
+                MoodAnalyserFactory.CreateMoodAnalysisUsingParamsCtor("MoodAnalyserApplication.MoodAnalyser", "Mood", "happy");
+            }
+            catch (MoodAnalysisException mae)
+            {
+                Assert.AreEqual(expected, mae.type);
+            }
+
+        }
+
+
+        //UC6
+        [TestMethod]
         public void GivenMoodAnalyseClassNameAndMethod_InvokeMethod()
         {
             string expected = "happy";
             string actual = MoodAnalyserFactory.InvokeAnalyseMoodMethod("Iam so happy today", "AnalyseMood");
             Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+       public void GivenImproperMethodName_ThrowNoSuchMethodException()
+        { 
+          
+
+            MoodAnalysisException.ExceptionType expected = MoodAnalysisException.ExceptionType.NO_SUCH_METHOD;
+            try
+            {
+                MoodAnalyserFactory.InvokeAnalyseMoodMethod("Iam so happy today", "Analyse");
+            }
+            catch (MoodAnalysisException mae)
+            {
+                Assert.AreEqual(expected, mae.type);
+            }
+
+        }
+
+
+        //UC7
+        [TestMethod]
+        public void GivenMessageDynamically_returnMessage()
+        {
+            string expected = "Iam happy today";
+           
+
+            string actual = MoodAnalyserFactory.SetField("Iam happy today","message");
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+        public void GivenImproperFieldName_ThrowNoSuchFieldException()
+        {
+
+
+            MoodAnalysisException.ExceptionType expected = MoodAnalysisException.ExceptionType.NO_SUCH_FIELD;
+            try
+            {
+                MoodAnalyserFactory.SetField("Iam so happy today", "mess");
+            }
+            catch (MoodAnalysisException mae)
+            {
+                Assert.AreEqual(expected, mae.type);
+            }
+
         }
 
 
